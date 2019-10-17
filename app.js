@@ -5,10 +5,17 @@ var bodyParser=require("body-parser");
 var methodOverride = require("method-override");
 var expressSanitizer = require("express-sanitizer");
 
+var dbstr = "mongodb+srv://babanbiswas:" + encodeURIComponent("Sept2019#") + "@cluster0-wegsi.mongodb.net/test?retryWrites=true&w=majority";
+//mongoose.connect("mongodb://localhost/rest",{useNewUrlParser:true,useUnifiedTopology:true});
+mongoose.connect(dbstr,{useNewUrlParser:true,
+useUnifiedTopology:true,
+useCreateIndex:true																												   }).then(() => {
+	console.log("Connected to Database");
+}).catch(err => {
+	console.log("Error :",err.message);
+});
 
-mongoose.connect("mongodb://localhost/rest",{useNewUrlParser:true,useUnifiedTopology:true});
-
-
+//mongodb+srv://babanbiswas:Sept2019#@cluster0-wegsi.mongodb.net/test?retryWrites=true&w=majority
 app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
